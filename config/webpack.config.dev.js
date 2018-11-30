@@ -97,6 +97,7 @@ module.exports = {
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
     paths.appIndexJs,
+    paths.appIndex2Js,
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
@@ -338,8 +339,14 @@ module.exports = {
   plugins: [
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
-      inject: true,
+        filename: "index.html",
+        inject: true,
       template: paths.appHtml,
+    }),
+    new HtmlWebpackPlugin({
+        filename: "index2.html",
+        inject: true,
+        template: paths.app2Html,
     }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
