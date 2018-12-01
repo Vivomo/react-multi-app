@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 import './App.css';
 
-const About = () => <h1 style={{color: 'red'}}>about</h1>;
-
+const About = () => <h1 style={{color: 'green'}}>About</h1>;
 class App extends Component {
   render() {
     return (
         <Router>
             <div>
-                index2
-                <Route exact path="about" component={About}/>
+                <h2>Index2</h2>
+                <Route path="/About" component={About}/>
             </div>
         </Router>
     );
