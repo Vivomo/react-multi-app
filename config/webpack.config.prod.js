@@ -114,7 +114,10 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the app code.
-  entry: [paths.appIndexJs],
+  entry: {
+    index: paths.appIndexJs,
+      index2: paths.appIndex2Js
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -427,6 +430,8 @@ module.exports = {
   plugins: [
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
+        chunks: ['index'],
+        filename: "index.html",
       inject: true,
       template: paths.appHtml,
       minify: {
@@ -442,6 +447,24 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+      new HtmlWebpackPlugin({
+          chunks: ['index2'],
+          filename: "index2.html",
+          inject: true,
+          template: paths.app2Html,
+          minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+          },
+      }),
     // Inlines the webpack runtime script. This script is too small to warrant
     // a network request.
     shouldInlineRuntimeChunk &&
