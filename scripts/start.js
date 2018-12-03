@@ -78,6 +78,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
+
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler(webpack, config, appName, urls, useYarn);
     // Load proxy config
@@ -98,7 +99,7 @@ checkBrowsers(paths.appPath, isInteractive)
         clearConsole();
       }
       console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
+      openBrowser(urls.localUrlForBrowser + (process.argv[2] ? process.argv[2] : ''));
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
